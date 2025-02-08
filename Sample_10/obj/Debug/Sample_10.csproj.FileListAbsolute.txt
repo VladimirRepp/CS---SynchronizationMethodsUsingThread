@@ -1,0 +1,7 @@
+D:\Системное программирование\MVS проекты - примеры\Sample_10  - Synchronization\Sample_10\Sample_10\bin\Debug\Sample_10.exe.config
+D:\Системное программирование\MVS проекты - примеры\Sample_10  - Synchronization\Sample_10\Sample_10\bin\Debug\Sample_10.exe
+D:\Системное программирование\MVS проекты - примеры\Sample_10  - Synchronization\Sample_10\Sample_10\bin\Debug\Sample_10.pdb
+D:\Системное программирование\MVS проекты - примеры\Sample_10  - Synchronization\Sample_10\Sample_10\obj\Debug\Sample_10.csproj.AssemblyReference.cache
+D:\Системное программирование\MVS проекты - примеры\Sample_10  - Synchronization\Sample_10\Sample_10\obj\Debug\Sample_10.csproj.CoreCompileInputs.cache
+D:\Системное программирование\MVS проекты - примеры\Sample_10  - Synchronization\Sample_10\Sample_10\obj\Debug\Sample_10.exe
+D:\Системное программирование\MVS проекты - примеры\Sample_10  - Synchronization\Sample_10\Sample_10\obj\Debug\Sample_10.pdb
