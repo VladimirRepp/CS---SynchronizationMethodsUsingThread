@@ -8,5 +8,6 @@ Using:
 - Console
 
 Example:
-![image](https://github.com/user-attachments/assets/2e6ad9f8-44a2-4f60-bd84-4c028c16b98f)
+![image](https://github.com/user-attachments/assets/ac2cf718-95dc-4980-a230-9b5f89990bdb)
+
 
