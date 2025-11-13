@@ -78,15 +78,19 @@ namespace Sample_10
             private Thread myThread;
             private int _counOfReadingsPerThisReader = 3; // количество чтений одного читателя
 
-            public Reader(int num)
-            {
-                myThread = new Thread(Read);
-                myThread.Name = $"Читатель №{num}";
-                myThread.Start();
-            }
-
-            public void Read()
-            {
+             public Reader(int id)
+          {
+              _thread = new Thread(Read);
+              _thread.Name = $"Читатель {id}";
+          }
+        
+          public void Start()
+          {
+              _thread.Start();
+          }
+        
+          private void Read()
+          {
                 while(_counOfReadingsPerThisReader > 0)
                 {
                     SEMAPHORE.WaitOne();
@@ -386,3 +390,4 @@ namespace Sample_10
         #endregion
     }
 }
+
