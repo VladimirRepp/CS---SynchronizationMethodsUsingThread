@@ -85,6 +85,7 @@ namespace Sample_10
             private static Semaphore SEMAPHORE = new Semaphore(3, 3);
             private Thread myThread;
             private int _counOfReadingsPerThisReader = 3; // количество чтений одного читателя
+            private Random _rand;
             
             public Thread Thread => _thread;
             
@@ -92,6 +93,7 @@ namespace Sample_10
               {
                   _thread = new Thread(Read);
                   _thread.Name = $"Читатель {id}";
+                 _rand = new Random(id);
               }
         
               public void Start()
@@ -107,14 +109,14 @@ namespace Sample_10
 
                     Console.WriteLine($"{Thread.CurrentThread.Name} - входит в библиотеку!");
                     Console.WriteLine($"{Thread.CurrentThread.Name} - читает!");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(_rand.Next(500, 1000)); // имитация чтения
 
                     Console.WriteLine($"{Thread.CurrentThread.Name} - покидает библиотеку!");
 
                     SEMAPHORE.Release();
 
                     _counOfReadingsPerThisReader--;
-                    Thread.Sleep(1000);
+                    Thread.Sleep(_rand.Next(500, 1000)); // имитация что ушли
                 }
             }
         }
@@ -400,5 +402,6 @@ namespace Sample_10
         #endregion
     }
 }
+
 
 
