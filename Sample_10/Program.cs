@@ -66,10 +66,18 @@ namespace Sample_10
         /// </summary>
         private static void Sample2_Semaphore()
         {
-            for(int i = 0; i < 5; i++)
+           Reader[] readers = new Reader[10];
+
+            for (int i = 0; i < readers.Length; i++)
             {
-                Reader reader = new Reader(i);
+                readers[i] = new Reader(i + 1);
+                readers[i].Start();
             }
+            
+            foreach (var reader in readers)
+            {
+                reader.Thread.Join();
+            }   
         }
 
         private class Reader
@@ -77,20 +85,22 @@ namespace Sample_10
             private static Semaphore SEMAPHORE = new Semaphore(3, 3);
             private Thread myThread;
             private int _counOfReadingsPerThisReader = 3; // количество чтений одного читателя
-
+            
+            public Thread Thread => _thread;
+            
              public Reader(int id)
-          {
-              _thread = new Thread(Read);
-              _thread.Name = $"Читатель {id}";
-          }
+              {
+                  _thread = new Thread(Read);
+                  _thread.Name = $"Читатель {id}";
+              }
         
-          public void Start()
-          {
-              _thread.Start();
-          }
-        
-          private void Read()
-          {
+              public void Start()
+              {
+                  _thread.Start();
+              }
+            
+              private void Read()
+              {
                 while(_counOfReadingsPerThisReader > 0)
                 {
                     SEMAPHORE.WaitOne();
@@ -390,4 +400,5 @@ namespace Sample_10
         #endregion
     }
 }
+
 
