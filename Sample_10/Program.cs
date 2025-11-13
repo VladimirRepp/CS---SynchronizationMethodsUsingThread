@@ -140,34 +140,42 @@ namespace Sample_10
         /// </summary>
         class MyThread
         {
-            public Thread myThread;
-            private ManualResetEvent _manualResetEvent;
-            private Random _rand;
+              private Thread myThread;
 
-            public MyThread(string name, ManualResetEvent manualResetEvent)
-            {
-                _rand = new Random();
-
-                _manualResetEvent = manualResetEvent;
-
-                myThread = new Thread(Run);
-                myThread.Name = name;
-                myThread.Start();
-            }
-
-            private void Run()
-            {
-                Console.WriteLine("Начало MyThread.Run");
-
-                for(int i = 0; i < 5; i++)
-                {
-                    Console.WriteLine($"Работает MyThread.Run {i}");
-                    Thread.Sleep(_rand.Next(500, 1000));
-                }
-
-                Console.WriteLine("Завершон MyThread.Run");
-                _manualResetEvent.Set(); // уведомляем о событие 
-            }
+              private ManualResetEvent _mre;
+              private Random _rand;
+            
+              public Thread MyThreadInstance => myThread;
+            
+              public MyThread(string name, ManualResetEvent mre)
+              {
+                  _mre = mre;
+            
+                  _rand = new Random();
+            
+                  myThread = new Thread(Run);
+                  myThread.Name = name;
+              }
+            
+              public void Start()
+              {
+                  myThread.Start();
+              }
+            
+              private void Run()
+              {
+                  Console.WriteLine("Начало работы - " + Thread.CurrentThread.Name);
+            
+                  for(int i = 0; i < 10; i++)
+                  {
+                      Console.WriteLine("Работает - " + Thread.CurrentThread.Name);
+                      Thread.Sleep(_rand.Next(500, 1000));
+                  }
+            
+                  Console.WriteLine("Завершена работа - " + Thread.CurrentThread.Name);
+            
+                  _mre.Set(); // установка события - сигнал основному потоку что работа завершена
+              }
         }
 
         private static void Sample3_Event()
@@ -175,12 +183,13 @@ namespace Sample_10
             ManualResetEvent manualResetEvent = new ManualResetEvent(false); // false - событие первоначально не уведомляется 
 
             MyThread myThread1 = new MyThread("Поток с событием №1", manualResetEvent);
+            myThread1.Start()
 
             Console.WriteLine("Основной поток ожидает событие №1...");
             manualResetEvent.WaitOne();
 
             Console.WriteLine("Основной поток получил уведомление события №1!");
-            manualResetEvent.Reset();
+            manualResetEvent.Reset(); // сброс в false, так как нового уведомления еще не было
 
             myThread1 = new MyThread("Поток с событием №2", manualResetEvent);
 
@@ -402,6 +411,7 @@ namespace Sample_10
         #endregion
     }
 }
+
 
 
 
