@@ -83,7 +83,7 @@ namespace Sample_10
         private class Reader
         {
             private static Semaphore SEMAPHORE = new Semaphore(3, 3);
-            private Thread myThread;
+            private Thread _thread;
             private int _counOfReadingsPerThisReader = 3; // количество чтений одного читателя
             private Random _rand;
             
@@ -411,6 +411,7 @@ namespace Sample_10
         #endregion
     }
 }
+
 
 
 
